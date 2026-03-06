@@ -16,7 +16,6 @@ public class TarefaRepository {
     private Long nextId = 1L;
 
     public TarefaRepository() {
-        // Pré-cadastrar 3 tarefas de exemplo
         Tarefa t1 = new Tarefa("Estudar Spring Boot", "Revisar os conceitos de Spring Boot e Thymeleaf");
         save(t1);
 

@@ -4,6 +4,7 @@ import com.biopark.tarefas.model.Tarefa;
 import com.biopark.tarefas.repository.TarefaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,14 @@ public class TarefaService {
 
     public List<Tarefa> listarTodas() {
         return tarefaRepository.findAll();
+    }
+
+    public List<Tarefa> listarPendentes() {
+        return tarefaRepository.findAll().stream().filter(t -> !t.getConcluida()).toList();
+    }
+
+    public List<Tarefa> listarConcluidas() {
+        return tarefaRepository.findAll().stream().filter(t -> t.getConcluida()).toList();
     }
 
     public Optional<Tarefa> buscarPorId(Long id) {
