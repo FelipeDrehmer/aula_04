@@ -10,6 +10,12 @@
         <a href="/tarefas?filtro=pendentes" class="btn btn-primary">Pendentes</a>
         <a href="/tarefas?filtro=concluidas" class="btn btn-primary">Concluídas</a>
 
+        <p>Você tem
+            <strong th:text="${total}"></strong> tarefas
+            (<span th:text="${pendentes}"></span> pendente,
+            <span th:text="${concluidas}"></span> concluída)
+        </p>
+
         <div class="alert alert-success" th:if="${mensagem}">
             <span th:text="${mensagem}"></span>
         </div>

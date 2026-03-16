@@ -9,6 +9,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/tarefas")
 public class TarefaController {
@@ -20,7 +22,7 @@ public class TarefaController {
     }
 
     @GetMapping
-    public String listar(@RequestParam (required = false) String filtro, Model model) {
+    public String listar(@RequestParam(required = false) String filtro, Model model) {
 
         if ("pendentes".equals(filtro)) {
             model.addAttribute("tarefas", tarefaService.listarPendentes());
@@ -29,6 +31,16 @@ public class TarefaController {
         } else {
             model.addAttribute("tarefas", tarefaService.listarTodas());
         }
+
+        int total = tarefaService.listarTodas().size();
+        int pendentes = tarefaService.listarPendentes().size();
+        int concluidas = tarefaService.listarConcluidas().size();
+
+        model.addAttribute("filtroAtual", filtro);
+
+        model.addAttribute("total", total);
+        model.addAttribute("pendentes", pendentes);
+        model.addAttribute("concluidas", concluidas);
 
         return "tarefas/lista";
     }
